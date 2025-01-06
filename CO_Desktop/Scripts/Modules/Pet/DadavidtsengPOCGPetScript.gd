@@ -1,6 +1,6 @@
 extends Sprite2D
 
-const UNREAL_EXE_PATH: String = "C:/Users/Shangqi Cai/Downloads/BetterDiscord-Windows.exe"
+const UNREAL_EXE_PATH: String = "C:/Users/Yu-Wei Tseng/Downloads/BetterDiscord-Windows.exe"
 var unreal_process_id: int = -1
 
 func is_process_alive(process_id: int) -> bool:

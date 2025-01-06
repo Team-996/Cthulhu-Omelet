@@ -3,8 +3,8 @@ extends Node2D
 var window_width
 var window_height
 var window_size
-
 var window_position
+
 func _ready() -> void:
 	window_width = ProjectSettings.get_setting("display/window/size/viewport_width")
 	window_height = ProjectSettings.get_setting("display/window/size/viewport_height")
@@ -19,3 +19,7 @@ func _ready() -> void:
 	print("Screen Size:", screen_size)
 	print("Window Size:", window_size)
 	print("Window Position:", window_position)
+	
+func _input(event: InputEvent) -> void:
+	if event.is_action_pressed("quit_game"):
+		get_tree().quit()

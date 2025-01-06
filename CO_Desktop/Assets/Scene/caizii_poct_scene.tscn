@@ -1,11 +1,13 @@
-[gd_scene load_steps=4 format=3 uid="uid://w3ij4h50f451"]
+[gd_scene load_steps=5 format=3 uid="uid://w3ij4h50f451"]
 
+[ext_resource type="Script" path="res://Scripts/Modules/Core/Client/ClientHandler.gd" id="1_3m3lq"]
 [ext_resource type="Texture2D" uid="uid://cs6ympqiukder" path="res://Assets/Pet/pet_sprite.png" id="2_kxe6l"]
 [ext_resource type="Script" path="res://Scripts/Modules/Pet/CaiziiPOCTPetScript.gd" id="3_0tqoc"]
 [ext_resource type="Environment" uid="uid://dy6aybeuck4fh" path="res://Assets/Environment/desktop_environment.tres" id="4_swmf3"]
 
 [node name="MainNode" type="Node2D"]
 visible = false
+script = ExtResource("1_3m3lq")
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
 visible = false
