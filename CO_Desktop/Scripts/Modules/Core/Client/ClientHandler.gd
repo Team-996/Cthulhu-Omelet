@@ -1,5 +1,8 @@
 extends Node2D
 
+@onready var sprite2D: Sprite2D = $Sprite2D
+@onready var animation_player: AnimationPlayer = $AnimationPlayer
+
 var window_width
 var window_height
 var window_size
@@ -20,6 +23,15 @@ func _ready() -> void:
 	print("Window Size:", window_size)
 	print("Window Position:", window_position)
 	
+	
 func _input(event: InputEvent) -> void:
 	if event.is_action_pressed("quit_game"):
 		get_tree().quit()
+	if event is InputEventMouseButton and event.button_mask == MOUSE_BUTTON_MASK_RIGHT:
+		var local_mouse_pos = DisplayServer.mouse_get_position()
+		if sprite2D.is_mouse_over_sprite(local_mouse_pos, window_position+window_size/2):	
+			printt(local_mouse_pos)
+			print(get_viewport().get_mouse_position())
+		else:
+			#animation_player.play("Run_L")
+			print("Mouse is not over the sprite!") 
