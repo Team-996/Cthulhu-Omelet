@@ -1,9 +1,11 @@
 extends Node2D
 
-@onready var sprite2D: TestSprite = $Sprite2D
-#@onready var animation_player: AnimationPlayer = $AnimationPlayer
-@onready var animation_player_2: AnimationPlayer = $AnimationPlayer2
+@onready var pet_sprite: PetSprite = $pet_sprite
+#@onready var pet_anim: AnimationPlayer = $pet_anim
+@onready var button_anim: AnimationPlayer = $button_anim
 @onready var button: Button = $Button
+
+
 
 var window_width
 var window_height
@@ -32,7 +34,7 @@ func _input(event: InputEvent) -> void:
 		get_tree().quit()
 	if event is InputEventMouseButton and event.button_mask == MOUSE_BUTTON_MASK_RIGHT:
 		var screen_mouse_pos: Vector2i = DisplayServer.mouse_get_position()
-		if sprite2D.is_mouse_over_sprite(screen_mouse_pos, window_position+window_size/2):
+		if pet_sprite.is_mouse_over_sprite(screen_mouse_pos, window_position+window_size/2):
 			print("MOUSE SCREEN POS: ", screen_mouse_pos)
 			print("Mouse is hovering over the visible part of the sprite!")
 		else:
@@ -40,8 +42,8 @@ func _input(event: InputEvent) -> void:
 
 	# TODO: pixel perfect detection when animation player is playing
 	if event.is_action_pressed("pet_start_running"):
-		#animation_player.play("Run_L")
-		animation_player_2.play("button_move")
+		#pet_anim.play("Run_L")
+		button_anim.play("button_move")
 		
 	#if event.is_action_pressed("pet_stop_running"):
-		#animation_player.pause()
+		#pet_anim.pause()

@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://doacasvnruunb"
-path="res://.godot/imported/Artboard 2.png-51df030404ea4497925a9a9333dacacc.ctex"
+uid="uid://b3t7hivgj0r53"
+path="res://.godot/imported/test_sprite_01.png-2455839b5b68ca29a0cd8d4056de24c4.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://Assets/Pet/Artboard 2.png"
-dest_files=["res://.godot/imported/Artboard 2.png-51df030404ea4497925a9a9333dacacc.ctex"]
+source_file="res://Assets/Pet/test_sprite_01.png"
+dest_files=["res://.godot/imported/test_sprite_01.png-2455839b5b68ca29a0cd8d4056de24c4.ctex"]
 
 [params]
 

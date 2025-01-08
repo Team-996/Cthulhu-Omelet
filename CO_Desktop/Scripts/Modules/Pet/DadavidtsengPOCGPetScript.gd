@@ -1,5 +1,5 @@
 extends Sprite2D
-class_name TestSprite
+class_name PetSprite
 
 const UNREAL_EXE_PATH: String = "C:/Users/Yu-Wei Tseng/Downloads/BetterDiscord-Windows.exe"
 var unreal_process_id: int    = -1
