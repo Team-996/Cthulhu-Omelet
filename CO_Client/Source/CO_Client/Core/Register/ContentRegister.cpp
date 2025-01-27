@@ -3,10 +3,11 @@
 
 #include "ContentRegister.h"
 
-bool UContentRegister::RegisterFromID_Def(FString id, TSubclassOf<UDefinition> definition)
+bool UContentRegister::RegisterFromDataTable(UDataTable* DataTable)
 {
 	return false;
 }
+
 
 bool UContentRegister::RegisterFromDef(TSubclassOf<UDefinition> definition)
 {
