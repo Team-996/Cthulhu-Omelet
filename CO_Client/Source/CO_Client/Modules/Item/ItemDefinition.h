@@ -19,10 +19,12 @@ public:
 	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = Item)
 	TObjectPtr<UTexture2D> itemIcon;
 	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = Item)
+	FString itemName = "Default Item";
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = Item)
 	int64 maxStackSize = 999;
 	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = Item)
-	TArray<FString> itemDescriptions;
-	virtual void ParseMetaData(const TMap<FString, FString>& MetaData) override;
+	TArray<FString> itemDescriptions = {"This is the default item", "You should not have this item in your container"};
+	virtual void    ParseMetaData(const TMap<FString, FString>& MetaData) override;
 
 private:
 	TMap<FString, FString> itemMetaData;
