@@ -2,8 +2,6 @@
 
 
 #include "ItemRegister.h"
-
-#include "IDetailTreeNode.h"
 #include "ItemDefinition.h"
 #include "ItemRowData.h"
 
@@ -11,14 +9,8 @@ bool UItemRegister::RegisterFromDataTable(UDataTable* DataTable)
 {
 	for (auto& Row : DataTable->GetRowMap())
 	{
-		FItemRegisterDataRow*        Item          = (FItemRegisterDataRow*)(Row.Value);
-		TObjectPtr<UItemDefinition>  definition    = nullptr;
-		TSubclassOf<UItemDefinition> templateClass = nullptr;
-		templateClass                              = Item->DefinitionClassTemplate;
-		definition                                 = NewObject<UItemDefinition>(templateClass);
-		/// Read Table row metadata and parse into item definition
-		definition->ParseMetaData(Item->MetaData);
-		/// End of parse
+		FItemRegisterDataRow*       Item       = (FItemRegisterDataRow*)(Row.Value);
+		TObjectPtr<UItemDefinition> definition = BuildItemDefinition(*Item);
 		if (definition != nullptr)
 		{
 			RegisterContext.Add(Item->ItemID, definition);
@@ -53,3 +45,19 @@ bool UItemRegister::RegisterFromDef(TSubclassOf<UDefinition> definition)
 	}
 }
 
+UItemDefinition* UItemRegister::BuildItemDefinition(FItemRegisterDataRow& rowData)
+{
+	TSubclassOf<UItemDefinition> templateClass = rowData.DefinitionClassTemplate;
+	TObjectPtr<UItemDefinition>  definition    = NewObject<UItemDefinition>(templateClass);
+
+	if (definition == nullptr)
+	{
+		UE_LOG(LogTemp, Error, TEXT("UItemRegister::BuildItemDefinition -> Failed to build item definition instance"));
+		return templateClass.GetDefaultObject();
+	}
+
+	/// Read Table row metadata and parse into item definition
+	definition->ParseMetaData(rowData.MetaData);
+	/// End of parse
+	return definition;
+}

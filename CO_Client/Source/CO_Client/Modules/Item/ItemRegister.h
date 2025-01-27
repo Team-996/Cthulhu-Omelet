@@ -7,6 +7,8 @@
 #include "UObject/Object.h"
 #include "ItemRegister.generated.h"
 
+struct FItemRegisterDataRow;
+class UItemDefinition;
 /**
  * 
  */
@@ -29,4 +31,12 @@ public:
 	virtual bool RegisterFromDataTable(UDataTable* DataTable) override;
 	UFUNCTION(BlueprintCallable, Category = "Register")
 	virtual bool RegisterFromDef(TSubclassOf<UDefinition> definition) override;
+	/// Build Item Definition from the row of ItemDatatable, it will return the default item Definition
+	/// if It can not build
+	/// @param rowData The row of Item register DataTable, represent a single item register data
+	/// @return The ready ItemDefinition filled with Data
+	UFUNCTION(BlueprintCallable, Category = "Register")
+	UItemDefinition* BuildItemDefinition(FItemRegisterDataRow& rowData);
+	
+private:
 };
