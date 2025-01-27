@@ -30,7 +30,7 @@ public:
 
 	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Item")
 	TMap<FString, FString> MetaData;
-
-	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Item")
+	/// Specify the Definition Class template to use for instantiate ItemDefinition
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Builder")
 	TSubclassOf<UItemDefinition> DefinitionClassTemplate;
 };
