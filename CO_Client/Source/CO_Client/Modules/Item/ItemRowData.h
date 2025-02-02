@@ -11,7 +11,7 @@ class UItemDefinition;
  * 
  */
 USTRUCT(BlueprintType)
-struct FItemRegisterDataRow
+struct FItemRegisterDataRow : public FTableRowBase
 {
 	GENERATED_BODY()
 
@@ -23,7 +23,10 @@ public:
 	FString Name;
 
 	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Item")
-	int32 MaxStackSize;
+	TMap<FString, TObjectPtr<UTexture2D>> ItemIcon;
+
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Item")
+	int32 MaxStackSize = 999;
 
 	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Item")
 	TArray<FString> Descriptions;
