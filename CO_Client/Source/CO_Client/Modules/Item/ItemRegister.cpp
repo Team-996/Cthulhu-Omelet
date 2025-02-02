@@ -50,14 +50,28 @@ UItemDefinition* UItemRegister::BuildItemDefinition(FItemRegisterDataRow& rowDat
 	TSubclassOf<UItemDefinition> templateClass = rowData.DefinitionClassTemplate;
 	TObjectPtr<UItemDefinition>  definition    = NewObject<UItemDefinition>(templateClass);
 
+	UE_LOG(LogTemp, Display, TEXT("UItemRegister::BuildItemDefinition -> Successful create Definition class: %s"), *rowData.ItemID)
+
 	if (definition == nullptr)
 	{
 		UE_LOG(LogTemp, Error, TEXT("UItemRegister::BuildItemDefinition -> Failed to build item definition instance"));
 		return templateClass.GetDefaultObject();
 	}
+	/// Data Injection
+	/// TODO: consider move those part into builder (Builder)
+	definition->id               = rowData.ItemID;
+	definition->itemName         = rowData.Name;
+	definition->maxStackSize     = rowData.MaxStackSize;
+	definition->itemDescriptions = rowData.Descriptions;
+	definition->itemIcon         = rowData.ItemIcon;
+
+	UE_LOG(LogTemp, Display, TEXT("UItemRegister::BuildItemDefinition -> Parsing item MetaData: %s"), *rowData.ItemID)
 
 	/// Read Table row metadata and parse into item definition
 	definition->ParseMetaData(rowData.MetaData);
 	/// End of parse
+
+	UE_LOG(LogTemp, Display, TEXT("UItemRegister::BuildItemDefinition -> Successful create Definition Instance: %s"), *rowData.ItemID)
+
 	return definition;
 }

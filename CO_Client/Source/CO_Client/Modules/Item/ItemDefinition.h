@@ -10,14 +10,14 @@
 /**
  * 
  */
-UCLASS()
+UCLASS(Blueprintable, BlueprintType)
 class CO_CLIENT_API UItemDefinition : public UDefinition
 {
 	GENERATED_BODY()
 
 public:
 	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = Item)
-	TObjectPtr<UTexture2D> itemIcon;
+	TMap<FString,TObjectPtr<UTexture2D>> itemIcon;
 	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = Item)
 	FString itemName = "Default Item";
 	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = Item)
