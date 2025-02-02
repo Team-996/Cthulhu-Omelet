@@ -17,12 +17,15 @@ class CO_CLIENT_API UContentRegister : public UObject
 
 public:
 	UPROPERTY(EditAnywhere, BlueprintReadWrite)
+	FString NameSpace = FString("Default");
+
+	UPROPERTY(EditAnywhere, BlueprintReadWrite)
 	TObjectPtr<UClass> ContentRegisterClass;
 	/// The Register Context contain all definition instance that register form Class Definition
 	/// , DataTable, or individual Class, The RegisterContext need merge together to get complete
 	/// TMap
 	UPROPERTY(VisibleAnywhere, Category="Register")
-	TMap<FString, TObjectPtr<UDefinition>> RegisterContext;
+	TMap<FString, TObjectPtr<UDefinition>> RegisterContext; // <id, definition instance>
 
 public:
 	virtual bool RegisterFromDataTable(UDataTable* DataTable);
