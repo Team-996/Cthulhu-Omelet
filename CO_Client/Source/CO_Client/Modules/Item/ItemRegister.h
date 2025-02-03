@@ -37,6 +37,7 @@ public:
 	/// @return The ready ItemDefinition filled with Data
 	UFUNCTION(BlueprintCallable, Category = "Register")
 	UItemDefinition* BuildItemDefinition(FItemRegisterDataRow& rowData);
+
 	
 private:
 };
