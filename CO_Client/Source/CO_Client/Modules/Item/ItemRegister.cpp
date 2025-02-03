@@ -7,23 +7,38 @@
 
 bool UItemRegister::RegisterFromDataTable(UDataTable* DataTable)
 {
+	if (!DataTable)
+	{
+		UE_LOG(LogTemp, Error, TEXT("RegisterFromDataTable: DataTable is null!"));
+		return false;
+	}
+
+	bool bSuccess = true;
+
 	for (auto& Row : DataTable->GetRowMap())
 	{
 		FItemRegisterDataRow*       Item       = (FItemRegisterDataRow*)(Row.Value);
 		TObjectPtr<UItemDefinition> definition = BuildItemDefinition(*Item);
+
 		if (definition != nullptr)
 		{
-			RegisterContext.Add(Item->ItemID, definition);
-			return true;
+			if (RegisterContext.Contains(Item->ItemID))
+			{
+				UE_LOG(LogTemp, Warning, TEXT("RegisterFromDataTable: Item ID %s is already registered!"), *Item->ItemID);
+			}
+			else
+			{
+				RegisterContext.Add(Item->ItemID, definition);
+			}
 		}
 		else
 		{
-			UE_LOG(LogTemp, Error, TEXT("RegisterFromDataTable: Failed to register item definition instance"));
-			return false;
+			UE_LOG(LogTemp, Error, TEXT("RegisterFromDataTable: Failed to register item definition instance for ItemID: %s"), *Item->ItemID);
+			bSuccess = false;
 		}
 	}
 
-	return true;
+	return bSuccess;
 }
 
 bool UItemRegister::RegisterFromDef(TSubclassOf<UDefinition> definition)
@@ -48,7 +63,7 @@ bool UItemRegister::RegisterFromDef(TSubclassOf<UDefinition> definition)
 UItemDefinition* UItemRegister::BuildItemDefinition(FItemRegisterDataRow& rowData)
 {
 	TSubclassOf<UItemDefinition> templateClass = rowData.DefinitionClassTemplate;
-	TObjectPtr<UItemDefinition>  definition    = NewObject<UItemDefinition>(templateClass);
+	TObjectPtr<UItemDefinition>  definition    = NewObject<UItemDefinition>(this);
 
 	UE_LOG(LogTemp, Display, TEXT("UItemRegister::BuildItemDefinition -> Successful create Definition class: %s"), *rowData.ItemID)
 
