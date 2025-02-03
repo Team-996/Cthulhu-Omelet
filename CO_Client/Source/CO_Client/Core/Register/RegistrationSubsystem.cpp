@@ -5,6 +5,7 @@
 
 #include "Definition.h"
 #include "CO_Client/Modules/Item/ItemRegister.h"
+URegistrationSubsystem* URegistrationSubsystem::_registrationSubsystem = nullptr;
 
 void URegistrationSubsystem::Initialize(FSubsystemCollectionBase& Collection)
 {
@@ -12,6 +13,8 @@ void URegistrationSubsystem::Initialize(FSubsystemCollectionBase& Collection)
 
 	// reserve
 	RegisterMap.Reserve(5);
+
+	_registrationSubsystem = this;
 }
 
 UItemRegister* URegistrationSubsystem::createItems(FString _namespace)
@@ -59,4 +62,9 @@ UDefinition* URegistrationSubsystem::GetValue(FString _namespace, FString _id)
 	{
 		return nullptr;
 	}
+}
+
+URegistrationSubsystem* URegistrationSubsystem::GetRegistrationSubsystem()
+{
+	return _registrationSubsystem;
 }

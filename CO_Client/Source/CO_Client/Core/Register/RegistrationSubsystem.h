@@ -55,5 +55,9 @@ public:
 	// createPets()
 
 	// createBlocks()
+	UFUNCTION(BlueprintCallable, Category = "Registration")
+	static URegistrationSubsystem* GetRegistrationSubsystem();
+
 private:
+	static URegistrationSubsystem* _registrationSubsystem;
 };
