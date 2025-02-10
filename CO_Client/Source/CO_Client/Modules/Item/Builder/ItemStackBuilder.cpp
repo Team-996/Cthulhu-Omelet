@@ -36,20 +36,35 @@ UItemStackBuilder* UItemStackBuilder::WithDataComponent(UItemDataComponent* Comp
 	return this;
 }
 
-UItemStack* UItemStackBuilder::Build()
+UItemStackBuilder* UItemStackBuilder::WithCommonProperties(FString NameSpace, FString Path, int32 Count)
+{
+	WithNamespaceAndPath(NameSpace, Path);
+	WithCount(Count);
+	return this;
+}
+
+
+UItemStack* UItemStackBuilder::Build(UObject* outer)
 {
 	if (!_definition)
 	{
 		UE_LOG(LogTemp, Error, TEXT("UItemStackBuilder::Build() -> No Definition set!"));
+		throw new std::exception("No Definition set!");
 	}
 	// Need Outer perhaps
-	UItemStack* itemStack = NewObject<UItemStack>();
-	itemStack->Init(_definition, _count);
+	UItemStack* itemStack = NewObject<UItemStack>(outer);
+	itemStack->Init(_definition, _count); // Init ItemStack
 
+	// Append the data component by builder to the ItemStack
 	for (TObjectPtr<UItemDataComponent> ItemDataComponent : _dataComponents)
 	{
 		itemStack->AddDataComponent(ItemDataComponent);
 	}
 
 	return itemStack;
+}
+
+UItemStackBuilder* UItemStackBuilder::Builder()
+{
+	return NewObject<UItemStackBuilder>();
 }

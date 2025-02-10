@@ -12,7 +12,7 @@ class UItemDefinition;
 /**
  * 
  */
-UCLASS()
+UCLASS(BlueprintType)
 class CO_CLIENT_API UItemStackBuilder : public UObject
 {
 	GENERATED_BODY()
@@ -21,16 +21,22 @@ public:
 	UItemStackBuilder();
 
 	UFUNCTION(BlueprintCallable, Category = "Item")
-	UItemStackBuilder * WithDefinition(UItemDefinition* Definition);
+	UItemStackBuilder* WithDefinition(UItemDefinition* Definition);
 	UFUNCTION(BlueprintCallable, Category = "Item")
-	UItemStackBuilder * WithNamespaceAndPath(FString NameSpace = FString("Default"), FString Path = FString("Default"));
+	UItemStackBuilder* WithNamespaceAndPath(FString NameSpace = FString("Default"), FString Path = FString("Default"));
 	UFUNCTION(BlueprintCallable, Category = "Item")
-	UItemStackBuilder * WithCount(int32 Count);
+	UItemStackBuilder* WithCount(int32 Count = 1);
 	UFUNCTION(BlueprintCallable, Category = "Item")
-	UItemStackBuilder * WithDataComponent(UItemDataComponent* Component);
-
+	UItemStackBuilder* WithDataComponent(UItemDataComponent* Component);
+	UFUNCTION(BlueprintCallable, Category = "Item")
+	UItemStackBuilder* WithCommonProperties(FString NameSpace = FString("Default"), FString Path = FString("Default"), int32 Count = 1);
+	/// Build the customize ItemStack with outer
+	/// @param outer the outer of the ItemStack
+	/// @return the ItemStack
 	UFUNCTION(BlueprintCallable, Category = "Build")
-	UItemStack * Build();
+	UItemStack* Build(UObject* outer);
+	/// native static getter of ItemStack builder
+	static UItemStackBuilder* Builder();
 
 protected:
 	TObjectPtr<UItemDefinition>            _definition = nullptr;
