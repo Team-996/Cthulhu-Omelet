@@ -49,15 +49,12 @@ bool UItemRegister::RegisterFromDef(TSubclassOf<UDefinition> definition)
 		UE_LOG(LogTemp, Error, TEXT("RegisterFromDef(): Failed to register item definition instance"));
 		return false;
 	}
-	else
+	if (RegisterContext.Find(ItemDefinition->id))
 	{
-		if (RegisterContext.Find(ItemDefinition->id))
-		{
-			UE_LOG(LogTemp, Warning, TEXT("RegisterFromDef(): You try to register the definition with same id"));
-		}
-		RegisterContext.Add(ItemDefinition->id, ItemDefinition);
-		return true;
+		UE_LOG(LogTemp, Warning, TEXT("RegisterFromDef(): You try to register the definition with same id"));
 	}
+	RegisterContext.Add(ItemDefinition->id, ItemDefinition);
+	return true;
 }
 
 UItemDefinition* UItemRegister::BuildItemDefinition(FItemRegisterDataRow& rowData)

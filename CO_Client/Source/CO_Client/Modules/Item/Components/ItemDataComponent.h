@@ -14,7 +14,6 @@ struct FComponentData
 {
 	GENERATED_BODY()
 
-public:
 	TObjectPtr<UItemDataComponent>  ItemDataComponent;
 	TSubclassOf<UItemDataComponent> ItemDataComponentClass;
 };

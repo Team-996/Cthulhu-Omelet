@@ -22,11 +22,10 @@ public:
 	UPROPERTY(BlueprintReadWrite)
 	TObjectPtr<UDataTable> ItemRegisterDataTable;
 
-public:
 	/// Register items from correspond datatable, user need to set correct datatable
-	/// or else it would fail to register items
-	/// @param DataTable The datatable need to read its rows to register items
-	/// @return whether or not successful register
+		/// or else it would fail to register items
+		/// @param DataTable The datatable need to read its rows to register items
+		/// @return whether or not successful register
 	UFUNCTION(BlueprintCallable, Category = "Register")
 	virtual bool RegisterFromDataTable(UDataTable* DataTable) override;
 	UFUNCTION(BlueprintCallable, Category = "Register")
@@ -37,7 +36,4 @@ public:
 	/// @return The ready ItemDefinition filled with Data
 	UFUNCTION(BlueprintCallable, Category = "Register")
 	UItemDefinition* BuildItemDefinition(FItemRegisterDataRow& rowData);
-
-	
-private:
 };

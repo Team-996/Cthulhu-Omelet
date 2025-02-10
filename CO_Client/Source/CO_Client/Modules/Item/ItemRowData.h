@@ -15,7 +15,6 @@ struct FItemRegisterDataRow : public FTableRowBase
 {
 	GENERATED_BODY()
 
-public:
 	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Item")
 	FString ItemID;
 
