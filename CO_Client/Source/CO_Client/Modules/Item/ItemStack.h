@@ -6,7 +6,6 @@
 #include "Components/ItemDataComponent.h"
 #include "UObject/Object.h"
 #include "ItemStack.generated.h"
-
 class UItemDataComponent;
 class UItemDefinition;
 /**

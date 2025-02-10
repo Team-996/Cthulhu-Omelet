@@ -4,6 +4,7 @@
 #include "ItemStack.h"
 
 #include "ItemDefinition.h"
+#include "Builder/ItemStackBuilder.h"
 
 UItemStack::UItemStack()
 {
